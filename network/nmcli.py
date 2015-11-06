@@ -869,12 +869,108 @@ class Nmcli(object):
 
     def create_connection_vlan(self):
         cmd=[self.module.get_bin_path('nmcli', True)]
-        # format for creating ethernet interface
+        # format for creating vlan interface
+        # To add a vlan connection with static IP configuration, issue a command as follows
+        # - nmcli: conn_name=my-eth1 ifname=eth1 type=ethernet ip4=192.168.100.100/24 gw4=192.168.100.1 state=present
+        # nmcli con add con-name my-eth1 ifname eth1 type ethernet ip4 192.168.100.100/24 gw4 192.168.100.1
+        cmd.append('con')
+        cmd.append('add')
+        cmd.append('type')
+        cmd.append('vlan')
+        cmd.append('con-name')
+        if self.conn_name is not None:
+            cmd.append(self.conn_name)
+        elif self.ifname is not None:
+            cmd.append(self.ifname)
+        if self.ifname is not None:
+            cmd.append('ifname')
+            cmd.append(self.ifname)
+        if self.vlandev is not None:
+            cmd.append('dev')
+            cmd.append(self.vlandev)
+        if self.vlanid is not None:
+            cmd.append('id')
+            cmd.append(self.vlanid)
+        if self.egress is not None:
+            cmd.append('egress')
+            cmd.append(self.egress)
+        if self.ingress is not None:
+            cmd.append('ingress')
+            cmd.append(self.ingress)
+        if self.flags is not None:
+            cmd.append('flags')
+            cmd.append(self.flags)
+        if self.mtu is not None:
+            cmd.append('mtu')
+            cmd.append(self.mtu)
+        if self.ip4 is not None:
+            cmd.append('ip4')
+            cmd.append(self.ip4)
+        if self.gw4 is not None:
+            cmd.append('gw4')
+            cmd.append(self.gw4)
+        if self.ip6 is not None:
+            cmd.append('ip6')
+            cmd.append(self.ip6)
+        if self.gw6 is not None:
+            cmd.append('gw6')
+            cmd.append(self.gw6)
+        if self.autoconnect is not None:
+            cmd.append('autoconnect')
+            cmd.append(self.autoconnect)
         return cmd
 
     def modify_connection_vlan(self):
         cmd=[self.module.get_bin_path('nmcli', True)]
-        # format for modifying ethernet interface
+        # format for modifying vlan interface
+        # To modify a vlan connection with static IP configuration, issue a command as follows
+        # - nmcli: conn_name=my-eth1 ifname=eth1 type=ethernet ip4=192.168.100.100/24 gw4=192.168.100.1 state=present
+        # nmcli con add con-name my-eth1 ifname eth1 type ethernet ip4 192.168.100.100/24 gw4 192.168.100.1
+        cmd.append('con')
+        cmd.append('mod')
+        cmd.append('type')
+        cmd.append('vlan')
+        cmd.append('con-name')
+        if self.conn_name is not None:
+            cmd.append(self.conn_name)
+        elif self.ifname is not None:
+            cmd.append(self.ifname)
+        if self.ifname is not None:
+            cmd.append('ifname')
+            cmd.append(self.ifname)
+        if self.vlandev is not None:
+            cmd.append('dev')
+            cmd.append(self.vlandev)
+        if self.vlanid is not None:
+            cmd.append('id')
+            cmd.append(self.vlanid)
+        if self.egress is not None:
+            cmd.append('egress')
+            cmd.append(self.egress)
+        if self.ingress is not None:
+            cmd.append('ingress')
+            cmd.append(self.ingress)
+        if self.flags is not None:
+            cmd.append('flags')
+            cmd.append(self.flags)
+        if self.mtu is not None:
+            cmd.append('mtu')
+            cmd.append(self.mtu)
+        if self.ip4 is not None:
+            cmd.append('ip4')
+            cmd.append(self.ip4)
+        if self.gw4 is not None:
+            cmd.append('gw4')
+            cmd.append(self.gw4)
+        if self.ip6 is not None:
+            cmd.append('ip6')
+            cmd.append(self.ip6)
+        if self.gw6 is not None:
+            cmd.append('gw6')
+            cmd.append(self.gw6)
+        if self.autoconnect is not None:
+            cmd.append('autoconnect')
+            cmd.append(self.autoconnect)
         return cmd
 
     def create_connection(self):
